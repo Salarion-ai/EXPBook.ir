@@ -58,7 +58,7 @@ const Hero = () => {
         </h1>
 
         <h2 className="text-3xl md:text-5xl font-bold mb-6 drop-shadow-lg">
-          تجربه هوش مصنوعی قابل کپی نیست
+          تجربه شما قابل کپی نیست
         </h2>
 
         <p className="text-xl md:text-2xl text-gray-200 mb-10 bg-black/50 p-2 rounded-lg inline-block">
