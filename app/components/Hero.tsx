@@ -1,80 +1,104 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ConsultationModal from "./ConsultationModal";
+import { useState } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  const [text, setText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const videoRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toRotate = ["EXP Book", "کتاب تجربه"];
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "+=1500", // طول انیمیشن اسکرول
+          scrub: 1, // نرمی حرکت با اسکرول
+          pin: true, // قفل کردن صفحه
+        },
+      });
 
-  useEffect(() => {
-    const handleType = () => {
-      const i = loopNum % toRotate.length;
-      const fullText = toRotate[i];
-
-      setText(
-        isDeleting
-          ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1)
-      );
-
-      setTypingSpeed(isDeleting ? 50 : 150);
-
-      if (!isDeleting && text === fullText) {
-        setTimeout(() => setIsDeleting(true), 2000); // مکث قبل از پاک کردن
-      } else if (isDeleting && text === "") {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-      }
-    };
-
-    const timer = setTimeout(handleType, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
+      // انیمیشن: متن بزرگ میشه و محو میشه
+      tl.to(textRef.current, {
+        scale: 50, // زوم خیلی زیاد داخل متن
+        opacity: 0,
+        duration: 1,
+        ease: "power2.inOut",
+      })
+        // ویدیو واضح میشه
+        .to(
+          videoRef.current,
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 1,
+            filter: "brightness(100%)",
+          },
+          "<"
+        ); // همزمان با قبلی
+    },
+    { scope: containerRef }
+  );
 
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden text-white">
-      {/* ویدیو بک‌گراند */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-40"
+    <section
+      ref={containerRef}
+      className="relative w-full h-screen overflow-hidden bg-navy-900 flex flex-col items-center justify-center"
+    >
+      {/* لایه ویدیو (ابتدا کمی تاریک و کوچک) */}
+      <div
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full z-0 opacity-40 scale-90"
+        style={{ filter: "brightness(50%)" }}
       >
-        {/* ویدیو باید در پوشه public باشد */}
-        <source src="/hero-video.mp4" type="video/mp4" />
-        Your browser does not support video.
-      </video>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          {/* اگر ویدیو آپلود نشد، یک رنگ جایگزین نشون میده */}
+          <source src="/hero-video.mp4" type="video/mp4" />
+          <source
+            src="https://assets.mixkit.co/videos/preview/mixkit-artificial-intelligence-concept-neural-network-40878-large.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-navy-900/30"></div>
+      </div>
 
-      <div className="z-10 text-center px-4 max-w-4xl mx-auto mt-[-50px]">
-        {/* افکت تایپ */}
-        <h1 className="text-6xl md:text-8xl font-extrabold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400 h-[100px]">
-          <span className="typing-cursor">{text}</span>
+      {/* لایه متن عظیم */}
+      <div
+        ref={textRef}
+        className="relative z-10 text-center mix-blend-difference"
+      >
+        <h1 className="text-[12vw] md:text-[15vw] font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-500 tracking-tighter whitespace-nowrap">
+          EXP BOOK
         </h1>
-
-        <h2 className="text-3xl md:text-5xl font-bold mb-6 drop-shadow-lg">
-          تجربه شما قابل کپی نیست
-        </h2>
-
-        <p className="text-xl md:text-2xl text-gray-200 mb-10 bg-black/50 p-2 rounded-lg inline-block">
-          کارگاه خصوصی هوش مصنوعی (حضوری/آنلاین) - تضمین تولید درآمد و انجام
-          پروژه
+        <p className="text-2xl md:text-4xl font-bold text-neon-blue mt-4 tracking-widest">
+          کتاب تجربه
         </p>
+      </div>
 
+      {/* دکمه که همیشه پایینه */}
+      <div className="absolute bottom-10 z-20">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold py-4 px-10 rounded-full transition transform hover:scale-105 shadow-lg border-2 border-emerald-400/50"
+          className="px-10 py-4 bg-transparent border-2 border-neon-blue text-white rounded-full font-bold text-xl transition-all duration-300 hover:bg-neon-blue hover:text-navy-900 hover:shadow-[0_0_30px_rgba(0,240,255,0.6)]"
         >
-          مشاوره رایگان میخوام
+          شروع مسیر درآمدزایی
         </button>
       </div>
 
-      {/* مودال مشاوره */}
       {isModalOpen && (
         <ConsultationModal onClose={() => setIsModalOpen(false)} />
       )}
