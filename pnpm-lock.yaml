@@ -23,6 +23,9 @@ devDependencies:
   '@eslint/eslintrc':
     specifier: ^3
     version: 3.3.1
+  '@gsap/react':
+    specifier: ^2.1.0
+    version: 2.1.2(gsap@3.13.0)(react@19.0.0)
   '@types/node':
     specifier: ^20
     version: 20.17.57
@@ -38,6 +41,9 @@ devDependencies:
   eslint-config-next:
     specifier: 15.2.0
     version: 15.2.0(eslint@9.28.0)(typescript@5.8.3)
+  gsap:
+    specifier: ^3.12.5
+    version: 3.13.0
   postcss:
     specifier: ^8
     version: 8.5.4
@@ -145,6 +151,16 @@ packages:
     dependencies:
       '@eslint/core': 0.14.0
       levn: 0.4.1
+    dev: true
+
+  /@gsap/react@2.1.2(gsap@3.13.0)(react@19.0.0):
+    resolution: {integrity: sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==}
+    peerDependencies:
+      gsap: ^3.12.5
+      react: '>=17'
+    dependencies:
+      gsap: 3.13.0
+      react: 19.0.0
     dev: true
 
   /@humanfs/core@0.19.1:
@@ -1799,6 +1815,10 @@ packages:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
     dev: true
 
+  /gsap@3.13.0:
+    resolution: {integrity: sha512-QL7MJ2WMjm1PHWsoFrAQH/J8wUeqZvMtHO58qdekHpCfhvhSL4gSiz6vJf5EeMP0LOn3ZCprL2ki/gjED8ghVw==}
+    dev: true
+
   /has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
     engines: {node: '>= 0.4'}
@@ -2465,7 +2485,6 @@ packages:
   /react@19.0.0:
     resolution: {integrity: sha512-V8AVnmPIICiWpGfm6GLzCR/W5FXLchHop40W4nXBmdlEceh16rCN8O8LNWm5bh5XUX91fh7KpA+W0TgMKmgTpQ==}
     engines: {node: '>=0.10.0'}
-    dev: false
 
   /reflect.getprototypeof@1.0.10:
     resolution: {integrity: sha512-00o4I+DVrefhv+nX0ulyi3biSHCPDe+yLv5o/p6d/UVlirijB8E16FtfwSAi4g3tcqrQ4lRAqQSoFEZJehYEcw==}
