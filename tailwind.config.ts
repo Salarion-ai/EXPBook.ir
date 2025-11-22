@@ -2,27 +2,25 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}", // محض احتیاط اگر ساختار src داشتی
   ],
   theme: {
     extend: {
       colors: {
         navy: {
-          900: "#020617", // سرمه‌ای خیلی تیره
+          900: "#020617",
           800: "#0f172a",
         },
         neon: {
-          blue: "#00f0ff", // آبی سایبرپانک
+          blue: "#00f0ff",
           purple: "#7000ff",
         },
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      },
       fontFamily: {
-        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'], // فونت رو بعدا میتونیم فارسی کنیم
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
     },
   },
