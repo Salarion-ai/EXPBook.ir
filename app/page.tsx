@@ -1,6 +1,6 @@
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Curriculum from "./components/Curriculum";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Curriculum from "../components/Curriculum";
 import React from "react";
 
 export default function Home() {

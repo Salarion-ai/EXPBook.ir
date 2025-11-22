@@ -4,25 +4,22 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 20, 20, 20;
+  --background-start-rgb: 2, 6, 23; /* رنگ سرمه‌ای خیلی تیره */
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #020617; /* رنگ پایه سرمه‌ای */
   font-family: system-ui, -apple-system, sans-serif;
+  overflow-x: hidden; /* حذف اسکرول مزاحم افقی */
 }
 
-/* انیمیشن تایپ شدن و پاک شدن */
+/* افکت تایپ */
 .typing-cursor::after {
   content: "|";
   animation: blink 1s step-start infinite;
+  color: #00f0ff; /* کرسر آبی نئونی */
 }
 
 @keyframes blink {
