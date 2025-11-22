@@ -20,7 +20,11 @@ const config: Config = {
         },
       },
       fontFamily: {
+<<<<<<< HEAD
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+=======
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'], // فونت رو بعدا میتونیم فارسی کنیم
+>>>>>>> 9b466e4732a90a42b6820af08497be73820fcf25
       },
     },
   },
